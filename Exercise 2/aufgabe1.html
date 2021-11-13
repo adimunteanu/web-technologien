@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YASN</title>
+  </head>
+  <body>
+    <h1>YASN</h1>
+    <h2>Yet Another Social Network</h2>
+    <form action="self" method="get">
+      <ul>
+        <li>
+          Registriere Dich bei YASN
+          <table>
+            <tr>
+              <td>Benutzername:</td>
+              <td><input type="text" name="benutzername" required /></td>
+            </tr>
+            <tr>
+              <td>Mobiltelefon:</td>
+              <td><input type="tel" name="mobiltelefon" required /></td>
+            </tr>
+            <tr>
+              <td>Mailadresse:</td>
+              <td><input type="email" name="mail" /></td>
+            </tr>
+            <tr>
+              <td>Wohnort:</td>
+              <td>
+                <input list="cities" type="text" name="wohnort" />
+                <datalist id="cities">
+                  <option value="Hamburg"></option>
+                  <option value="Berlin"></option>
+                  <option value="München"></option>
+                </datalist>
+              </td>
+            </tr>
+          </table>
+        </li>
+        <li>Lade Deine Freunde ein(Mailadressen angeben):</li>
+        <input type="email" name="mails" multiple />
+        <li>
+          Vervollständige Dein Profil:
+          <table>
+            <tr>
+              <td>Geburtsdatum:</td>
+              <td>
+                <input
+                  type="date"
+                  name="geburtsdatum"
+                  min="1900-01-01"
+                  max="2003-11-11"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Geburtsort</td>
+              <td>
+                <input
+                  type="text"
+                  name="geburtsort"
+                  placeholder="Gebe eine Stadt ein"
+                />
+              </td>
+            </tr>
+          </table>
+        </li>
+        <li>Persönliche Einstellungen:</li>
+        Hintergrundfarbe: <input type="color">
+      </ul>
+      <input type="submit" value="Absenden">
+    </form>
+  </body>
+</html>
