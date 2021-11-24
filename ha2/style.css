@@ -1,0 +1,41 @@
+td > * {
+  vertical-align: middle;
+}
+
+tr:nth-child(odd) {
+  background: lightgray;
+}
+
+tr:nth-child(2) td {
+  font-weight: bold;
+}
+
+tr:nth-child(3) td,
+tr:nth-child(5) td {
+  background: mediumblue;
+}
+
+tr:nth-child(2) td,
+tr:nth-child(4) td {
+  background: lightblue;
+}
+
+tr:nth-child(6) {
+  background: lightsalmon;
+}
+
+tr:nth-last-child(3) {
+  background: orange;
+}
+
+tr:nth-child(7) {
+  background: green;
+}
+
+tr:nth-last-child(1) {
+  background: red;
+}
+
+tr:nth-last-child(2) {
+  background: lightcoral;
+}
