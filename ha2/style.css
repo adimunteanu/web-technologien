@@ -2,7 +2,7 @@ td > * {
   vertical-align: middle;
 }
 
-tr:nth-child(odd) {
+tr:nth-child(even) {
   background: lightgray;
 }
 
