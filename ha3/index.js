@@ -18,7 +18,9 @@ function gradeOverview(students, grades) {
 }
 
 function duplicateStudents(students) {
-  return [...new Set(students.map((student) => student["matrikelnummer"]))].map(
+  return students.map((student) => student["matrikelnummer"])
+  .filter((matrikelnummer, index, self) => self.indexOf(matrikelnummer) != index)
+  .map(
     (matrikelnummer) => {
       return {
         matrikelnummer,
@@ -27,7 +29,7 @@ function duplicateStudents(students) {
         ),
       };
     }
-  );
+  ).filter(item => item.students.length > 1);
 }
 
 function invalidGrades(grades) {
