@@ -41,7 +41,7 @@
       <p>
         In dieser Aufgabe wollen wir uns dem Prinzip der Funktionen höherer Ordnung 
         und den Lambda-Ausdrücken beschäftigen. Hierzu wollen wir zwei Datensätze verarbeiten,
-        die eine Studierenden- und Prüfungsverwaltung nachbilden sollen. Sie finden dieser
+        die eine Studierenden- und Prüfungsverwaltung nachbilden sollen. Sie finden diese
         Datensätze in der Vorlage unter <code>ha03/js/db/</code>.
       </p>
       <p>
@@ -51,8 +51,8 @@
         Hürden zu überwinden, wie das Komma als Dezimaltrennzeichen.
       </p>
       <p>
-        In dieser Aufgabe sollen Sie ausschließlich mit <code>map(), reduce()</code> und <code>filter()</code>
-        auskommen. Implementieren Sie keine for-Schleifen.
+        In dieser Aufgabe sollen Sie <s>ausschließlich</s> mit <code>map(), reduce()</code> und <code>filter()</code>
+        <s>auskommen</s> <b style="color: red;">über Arrays iterieren</b>. Implementieren Sie keine for-Schleifen.
       </p>
     </div>
     
@@ -111,12 +111,17 @@
               <p>Betrachten Sie die Datei <code>index.js</code></p>
               <p>
                 Implementieren Sie die Funktion <code>duplicateStudents()</code>, die die Variable <code>students</code>
-                übergeben bekommt und nach Studierenden mit der selben Matrikelnummer filtert.
+                übergeben bekommt und <b style="color: red;">nach</b> Studierenden mit der selben Matrikelnummer filtert.
               </p>
               <p>
-                <b>Tipp:</b> Projizieren Sie zuerst alle Elemente in <code>students</code> nach <code>Matrikelnummer</code>.
+                <b>Tipp:</b> Projizieren Sie zuerst alle Elemente in <code>students</code> nach <code>matrikelnummer</code>.
                 Danach können Sie relativ einfach nach Duplikaten filtern. Projizieren Sie zuletzt nach folgendem Format:
                 <code>{ matrikelnummer: (matrikelnummer), students: [(students[i], students[j], ...)] }</code>.
+              </p>
+              <p style="color: red; font-weight: bold;">
+                <u>Hinweis:</u> Sie sollen nach Duplikaten im Array <code>students</code> filtern. 
+                Das schließt nicht aus, dass es Duplikate im resultierenden Array gibt.
+                Duplikate im resultierenden Array sollen nicht betrachtet werden, d.h. sie werden ebenfalls ins Zielformat projiziert.
               </p>
             </td>
           </tr>
@@ -172,7 +177,13 @@
           return e;
         })
         .forEach((e) => {
-          let result = eval(e.cmd);
+          let result = [];
+          try {
+            result = eval(e.cmd);
+          } catch (err) {
+            console.error(err);
+          }
+          
           document.getElementById(e.id.split("-")[0]).innerHTML += e.html;
           let cell = document.getElementById(e.id);
           cell.innerHTML = output(result);
@@ -214,7 +225,7 @@
               })
               .sort((a, b) => a.matrikelnummer - b.matrikelnummer);              
         }
-      }
+      }       
     </script>
   </body>
 </html>
