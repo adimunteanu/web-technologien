@@ -18,18 +18,20 @@ function gradeOverview(students, grades) {
 }
 
 function duplicateStudents(students) {
-  return students.map((student) => student["matrikelnummer"])
-  .filter((matrikelnummer, index, self) => self.indexOf(matrikelnummer) != index)
-  .map(
-    (matrikelnummer) => {
+  return students
+    .map((student) => student["matrikelnummer"])
+    .filter(
+      (matrikelnummer, index, self) => self.indexOf(matrikelnummer) !== index
+    )
+    .map((matrikelnummer) => {
       return {
         matrikelnummer,
         students: students.filter(
           (student) => student["matrikelnummer"] === matrikelnummer
         ),
       };
-    }
-  ).filter(item => item.students.length > 1);
+    })
+    .filter((item) => item.students.length > 1);
 }
 
 function invalidGrades(grades) {
