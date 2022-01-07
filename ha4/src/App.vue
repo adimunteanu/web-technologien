@@ -34,6 +34,7 @@ import BooksListPagination from "./components/BooksListPagination.vue";
 import BookView from "./components/BookView.vue";
 import NavBar from "./components/NavBar.vue";
 import Tests from "./components/Tests.vue";
+import books from "./assets/books.json";
 
 export default {
   name: "App",
@@ -60,7 +61,11 @@ export default {
   },
   computed: {
     booksList() {
-      return []; // TODO: implement me
+      return books
+        .map((book) => {
+          return { ...book, authors: book.authors.split(";").join(", ") };
+        })
+        .sort((a, b) => a.title.localeCompare(b.title));
     },
     authorsList() {
       return []; // TODO: implement me
