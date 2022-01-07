@@ -13,7 +13,11 @@
       <div class="col">
         <author-search ref="authorSearch"></author-search>
 
-        <books-list ref="booksListView"></books-list>
+        <books-list
+          ref="booksListView"
+          :booksSlice="booksList.slice(page, page + windowSize)"
+          @itemSelected="setSelectedIndex"
+        ></books-list>
 
         <books-list-pagination
           ref="booksListPagination"
@@ -72,6 +76,9 @@ export default {
     },
   },
   methods: {
+    setSelectedIndex(event) {
+      this.selectedIndex = this.page + event;
+    },
     toggleTests() {
       this.testing = !this.testing;
     },
