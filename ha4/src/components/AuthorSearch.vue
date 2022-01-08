@@ -1,15 +1,36 @@
 <template>
-  <!-- TODO: implement me -->
-  <img src='@/assets/AuthorSearch.jpg' class='img-fluid rounded' alt=''>
+  <label for="author-search">Search books of author:</label>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      list="authors"
+      name="author-search"
+      id="author-search"
+      class="form-control"
+      placeholder="Stephen King, Stephen Hawking, Steve Turner, ..."
+      @change="testSearch"
+    />
+    <datalist id="authors">
+      <option
+        v-for="author in this.authors"
+        :key="author"
+        :value="author"
+      ></option>
+    </datalist>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'AuthorSearch',
+  name: "AuthorSearch",
+  props: {
+    authors: Array,
+  },
   methods: {
     testSearch(author) {
-      this.$emit('select-author', author);
-    }
-  }
-}
+      this.$emit("authorSelected", author);
+    },
+  },
+  emits: ["authorSelected"],
+};
 </script>

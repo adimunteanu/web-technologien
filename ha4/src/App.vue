@@ -11,7 +11,11 @@
 
     <div class="row">
       <div class="col">
-        <author-search ref="authorSearch"></author-search>
+        <author-search
+          ref="authorSearch"
+          :authors="authorsList"
+          @authorSelected="setFilterFn"
+        ></author-search>
 
         <books-list
           ref="booksListView"
@@ -76,10 +80,17 @@ export default {
         .map((book) => {
           return { ...book, authors: book.authors.split(";").join(", ") };
         })
+        .filter(this.filterFn)
         .sort((a, b) => a.title.localeCompare(b.title));
     },
     authorsList() {
-      return []; // TODO: implement me
+      return [
+        ...new Set(
+          books.flatMap((book) =>
+            book.authors.split(";").map((author) => author.trim())
+          )
+        ),
+      ].sort((a, b) => a.localeCompare(b));
     },
   },
   methods: {
@@ -88,6 +99,12 @@ export default {
     },
     updatePage(event) {
       this.page = event;
+    },
+    setFilterFn(event) {
+      this.selectedIndex = 0;
+      this.filterFn = event
+        ? (book) => book.authors.includes(event)
+        : () => true;
     },
     toggleTests() {
       this.testing = !this.testing;
