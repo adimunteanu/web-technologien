@@ -4,7 +4,13 @@
 
     <div class="row mb-3">
       <div class="col">
-        <nav-bar ref="navBar" :tests-open="testing" @toggle-tests="toggleTests">
+        <nav-bar
+          ref="navBar"
+          :tests-open="testing"
+          :darkMode="darkMode"
+          @toggle-dark-mode="toggleDarkMode"
+          @toggle-tests="toggleTests"
+        >
         </nav-bar>
       </div>
     </div>
@@ -72,6 +78,7 @@ export default {
       darkThemeUrl:
         "https://cdn.jsdelivr.net/npm/bootstrap-dark-5@1.1.3/dist/css/bootstrap-night.min.css",
       testing: false,
+      darkMode: false,
     };
   },
   computed: {
@@ -90,7 +97,7 @@ export default {
             book.authors.split(";").map((author) => author.trim())
           )
         ),
-      ].sort((a, b) => a.localeCompare(b));
+      ].sort();
     },
   },
   methods: {
@@ -105,6 +112,15 @@ export default {
       this.filterFn = event
         ? (book) => book.authors.includes(event)
         : () => true;
+    },
+    toggleDarkMode() {
+      this.darkMode = !this.darkMode;
+      document
+        .getElementById("bootstrap-theme")
+        .setAttribute(
+          "href",
+          this.darkMode ? this.darkThemeUrl : this.lightThemeUrl
+        );
     },
     toggleTests() {
       this.testing = !this.testing;
