@@ -15,12 +15,19 @@
 
         <books-list
           ref="booksListView"
-          :booksSlice="booksList.slice(page, page + windowSize)"
+          :books="booksList"
+          :page="page"
+          :windowSize="windowSize"
+          :selectedIndex="selectedIndex"
           @itemSelected="setSelectedIndex"
         ></books-list>
 
         <books-list-pagination
           ref="booksListPagination"
+          :page="page"
+          :windowSize="windowSize"
+          :booksLength="booksList.length"
+          @pageUpdated="updatePage"
         ></books-list-pagination>
       </div>
 
@@ -77,7 +84,10 @@ export default {
   },
   methods: {
     setSelectedIndex(event) {
-      this.selectedIndex = this.page + event;
+      this.selectedIndex = event;
+    },
+    updatePage(event) {
+      this.page = event;
     },
     toggleTests() {
       this.testing = !this.testing;

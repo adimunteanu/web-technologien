@@ -3,8 +3,10 @@
     <ul class="list-group">
       <li
         class="list-group-item book"
-        :class="{ active: selectedIndex === index }"
-        v-for="(book, index) in this.booksSlice"
+        :class="{
+          active: this.selectedIndex === this.page * this.windowSize + index,
+        }"
+        v-for="(book, index) in booksSlice"
         :key="index"
         @click="selectItem(index)"
       >
@@ -18,18 +20,23 @@
 <script>
 export default {
   name: "BooksList",
-  data() {
-    return {
-      selectedIndex: 0,
-    };
-  },
   props: {
-    booksSlice: Array,
+    books: Array,
+    page: Number,
+    windowSize: Number,
+    selectedIndex: Number,
+  },
+  computed: {
+    booksSlice() {
+      return this.books.slice(
+        this.page * this.windowSize,
+        (this.page + 1) * this.windowSize
+      );
+    },
   },
   methods: {
     selectItem(index) {
-      this.selectedIndex = index;
-      this.$emit("itemSelected", index);
+      this.$emit("itemSelected", this.page * this.windowSize + index);
     },
   },
   emits: ["itemSelected"],
@@ -40,5 +47,8 @@ export default {
 #books p.book-title {
   font-weight: bold;
   margin: 0;
+}
+.book:hover {
+  cursor: pointer;
 }
 </style>
