@@ -32,7 +32,7 @@
       </div>
 
       <div class="col">
-        <book-view></book-view>
+        <book-view :book="booksList[selectedIndex]"></book-view>
       </div>
     </div>
   </div>
