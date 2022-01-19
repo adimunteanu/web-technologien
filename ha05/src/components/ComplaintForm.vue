@@ -119,6 +119,8 @@ export default {
       flightNumberPattern:
         /^([A-Z]{1}[A-Z\d]{1}|[A-Z\d]{1}[A-Z]{1}) ?[\d]{1,4}$/,
       emailAddress: "",
+      emailAddressPattern:
+        /^([A-z\d]+\.)*[A-z\d]*@(mailbox\.|campus\.){0,1}tu-berlin\.de$/,
       flightDate: "",
       flightTime: "",
       bankIban: "",
@@ -162,14 +164,10 @@ export default {
       this.formSubmitted = true;
     },
     flightNumberValid(value) {
-      // TODO: implement me
-      console.log(value);
-      console.log(this.flightNumberPattern.test(value));
       return value !== "" && this.flightNumberPattern.test(value);
     },
     emailAddressValid(value) {
-      // TODO: implement me
-      return value !== "";
+      return value !== "" && this.emailAddressPattern.test(value);
     },
     dateValid(value) {
       // TODO: implement me
