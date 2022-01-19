@@ -122,7 +122,9 @@ export default {
       emailAddressPattern:
         /^([A-z\d]+\.)*[A-z\d]*@(mailbox\.|campus\.){0,1}tu-berlin\.de$/,
       flightDate: "",
+      flightDatePattern: /^\d{1,4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/,
       flightTime: "",
+      flightTimePattern: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
       bankIban: "",
     };
   },
@@ -170,12 +172,10 @@ export default {
       return value !== "" && this.emailAddressPattern.test(value);
     },
     dateValid(value) {
-      // TODO: implement me
-      return value !== "";
+      return value !== "" && this.flightDatePattern.test(value);
     },
     timeValid(value) {
-      // TODO: implement me
-      return value !== "";
+      return value !== "" && this.flightTimePattern.test(value);
     },
     ibanValid(value) {
       // TODO: implement me
