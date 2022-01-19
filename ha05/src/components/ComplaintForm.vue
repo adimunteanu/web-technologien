@@ -116,6 +116,8 @@ export default {
     return {
       formSubmitted: false,
       flightNumber: "",
+      flightNumberPattern:
+        /^([A-Z]{1}[A-Z\d]{1}|[A-Z\d]{1}[A-Z]{1}) ?[\d]{1,4}$/,
       emailAddress: "",
       flightDate: "",
       flightTime: "",
@@ -152,7 +154,7 @@ export default {
     },
     isIbanInvalid() {
       return this.formSubmitted && !this.ibanValid(this.bankIban);
-    }
+    },
   },
   methods: {
     submitForm() {
@@ -161,7 +163,9 @@ export default {
     },
     flightNumberValid(value) {
       // TODO: implement me
-      return value !== "";
+      console.log(value);
+      console.log(this.flightNumberPattern.test(value));
+      return value !== "" && this.flightNumberPattern.test(value);
     },
     emailAddressValid(value) {
       // TODO: implement me
