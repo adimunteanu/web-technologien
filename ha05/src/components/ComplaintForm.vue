@@ -126,6 +126,8 @@ export default {
       flightTime: "",
       flightTimePattern: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
       bankIban: "",
+      bankIbanPattern:
+        /^DE[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?$/,
     };
   },
   computed: {
@@ -178,8 +180,19 @@ export default {
       return value !== "" && this.flightTimePattern.test(value);
     },
     ibanValid(value) {
-      // TODO: implement me
-      return value !== "";
+      if (value == "" || !this.bankIbanPattern.test(value)) {
+        return false;
+      }
+      let stringArray = Array.from(value);
+      let checksum = parseInt(stringArray[2]) * 10 + parseInt(stringArray[3]);
+
+      return (
+        checksum ===
+        stringArray
+          .slice(4, stringArray.length)
+          .filter((char) => char !== " ")
+          .reduce((total, char) => total + parseInt(char), 0)
+      );
     },
   },
 };
