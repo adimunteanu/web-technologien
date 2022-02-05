@@ -140,19 +140,28 @@ http
           }
         });
         break;
-      // case "DELETE":
-      // if (!query.id) {
-      //   res.writeHead(400);
-      //   res.end();
-      // } else if (data[query.id]) {
-      //   delete data[query.id];
-      //   res.writeHead(200);
-      //   res.end();
-      // } else {
-      //   res.writeHead(404);
-      //   res.end();
-      // }
-      // break;
+      case "DELETE":
+        if (path.slice(-1) === "/") {
+          if (!fs.existsSync(path)) {
+            res.writeHead(404);
+            res.end();
+            return console.error("Directory not found!");
+          }
+
+          fs.rmSync(path, { recursive: true });
+          res.writeHead(204, { "Content-Type": "text/json" });
+          res.end();
+        } else {
+          if (!fs.existsSync(path)) {
+            res.writeHead(404);
+            res.end();
+            return console.error("File not found!");
+          }
+          fs.rmSync(path);
+          res.writeHead(204, { "Content-Type": "text/json" });
+          res.end();
+        }
+        break;
       default:
         res.writeHead(405);
         res.end();
